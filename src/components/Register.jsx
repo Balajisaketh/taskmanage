@@ -262,10 +262,10 @@
 //     animation-delay: 4s;
 //   }
 // `;
-// document.head.appendChild(style);
+// document.head.appendChild(style);swswwwww
 
 // export default AuthForm;
-import { useState } from 'react';
+import React,{ useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, UserPlus, LogIn, Loader2 } from 'lucide-react';
 import { useDispatch } from 'react-redux';
