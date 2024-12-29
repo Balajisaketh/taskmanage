@@ -439,16 +439,38 @@ const TaskTable = () => {
       console.error(`Error deleting task with id ${id}:`, err);
     }
   };
-
   const handleAdd = async () => {
+    // Validate input fields
+    if (!newTaskTitle.trim()) {
+      alert("Task title is required.");
+      return;
+    }
+  
+    if (!newTaskStatus || !["Pending", "In Progress", "Completed"].includes(newTaskStatus)) {
+      alert("Task status must be one of: Pending, In Progress, or Completed.");
+      return;
+    }
+  
+    if (!newTaskPriority || !["Low", "Medium", "High"].includes(newTaskPriority)) {
+      alert("Task priority must be one of: Low, Medium, or High.");
+      return;
+    }
+  
+    if (!newTaskCreatedAt) {
+      alert("Task creation date is required.");
+      return;
+    }
+  
+    // Create the new task object
     const newTask = {
       title: newTaskTitle,
       status: newTaskStatus,
       priority: newTaskPriority,
       createdAt: newTaskCreatedAt,
     };
-
+  
     try {
+      // Make the POST request to add the task
       const response = await fetch("http://localhost:3000/tasks", {
         method: "POST",
         body: JSON.stringify(newTask),
@@ -456,19 +478,59 @@ const TaskTable = () => {
           "Content-Type": "application/json",
         },
       });
-
+  
       if (response.ok) {
+        // Fetch the updated tasks
         await fetchTasks();
+  
+        // Reset form fields
         setNewTaskTitle('');
         setNewTaskStatus('Pending');
         setNewTaskPriority('Medium');
         setNewTaskCreatedAt(new Date().toLocaleDateString());
+  
+        // Close the modal
         setIsModalOpen(false);
+      } else {
+        alert("Failed to add task. Please try again.");
       }
     } catch (error) {
       console.error("Error adding task:", error);
+      alert("An error occurred while adding the task. Please try again later.");
     }
   };
+  
+
+  // const handleAdd = async () => {
+
+  //   const newTask = {
+  //     title: newTaskTitle,
+  //     status: newTaskStatus,
+  //     priority: newTaskPriority,
+  //     createdAt: newTaskCreatedAt,
+  //   };
+
+  //   try {
+  //     const response = await fetch("http://localhost:3000/tasks", {
+  //       method: "POST",
+  //       body: JSON.stringify(newTask),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+
+  //     if (response.ok) {
+  //       await fetchTasks();
+  //       setNewTaskTitle('');
+  //       setNewTaskStatus('Pending');
+  //       setNewTaskPriority('Medium');
+  //       setNewTaskCreatedAt(new Date().toLocaleDateString());
+  //       setIsModalOpen(false);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error adding task:", error);
+  //   }
+  // };
 
   const getPriorityColor = (priority) => {
     switch (priority.toLowerCase()) {

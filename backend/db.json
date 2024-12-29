@@ -20,6 +20,13 @@
       "priority": "Medium",
       "createdAt": "12/28/2024",
       "id": 24
+    },
+    {
+      "title": "deploy",
+      "status": "Pending",
+      "priority": "Medium",
+      "createdAt": "12/28/2024",
+      "id": 25
     }
   ],
   "users": [
