@@ -445,6 +445,7 @@ const TaskTable = () => {
       alert("Task title is required.");
       return;
     }
+    // jhj
   
     if (!newTaskStatus || !["Pending", "In Progress", "Completed"].includes(newTaskStatus)) {
       alert("Task status must be one of: Pending, In Progress, or Completed.");
