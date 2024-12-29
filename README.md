@@ -1,7 +1,7 @@
 clone the repository
 open the project in vs code 
 ## running backend:
-cd backend
+cd backend,
 npm i 
 node Server.js
 open another command prompt in vs code and run json-server --watch db.json
